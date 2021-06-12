@@ -641,3 +641,11 @@ Received Import Request.
 Start importing Assets/Bird/green_bird.anim using Guid(2f03a3cc8de2268159d8f25dc82f0034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c6114b8cef4456aaf973a71197c699e') in 0,001776 seconds
   Import took 0,005197 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 712,905585 seconds.
+  path: Assets/Bird/Scripts
+  artifactKey: Guid(71f531d04e3704dcc9e45c607e1a4192) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Bird/Scripts using Guid(71f531d04e3704dcc9e45c607e1a4192) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5066b73a2cadc9c9a3518b3b9c94d24') in 0,001140 seconds
+  Import took 0,004319 seconds .
+
