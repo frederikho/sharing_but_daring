@@ -26,8 +26,8 @@ public class BrickCollision : MonoBehaviour
     
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.SetActive(false);
-        Destroy(collision.collider.gameObject);
+        //collision.gameObject.SetActive(false);
+        //Destroy(collision.collider.gameObject);
         Destroy(gameObject);
         Debug.Log("Destroyed");
     }

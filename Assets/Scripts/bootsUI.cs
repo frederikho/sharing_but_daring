@@ -5,7 +5,7 @@ using UnityEngine;
 public class bootsUI : MonoBehaviour
 {   
        
-    private int ownnerPlayer = 1;
+    public int ownnerPlayer = 1;
     public float x = 0f;
     public float y = 0f;
     public float offset = 2;

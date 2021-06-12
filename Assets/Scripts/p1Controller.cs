@@ -5,8 +5,8 @@ using UnityEngine;
 public class p1Controller : MonoBehaviour
 {
     public int PlayerNumberControls = 1; // determines weather player1 or player2 controls are used
-    private float leftright = 0f;
-    private float updown = 0f;
+    public float leftright = 0f;
+    public float updown = 0f;
     private string AxisName;   // Start is called before the first frame update
     Rigidbody2D body;
     public float speed;

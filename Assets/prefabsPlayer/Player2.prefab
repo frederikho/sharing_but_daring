@@ -98,7 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNumberControls: 1
-  speed: 0
+  leftright: 0
+  updown: 0
+  speed: 200
   limiter: 0
 --- !u!61 &8540791763639263362
 BoxCollider2D:
