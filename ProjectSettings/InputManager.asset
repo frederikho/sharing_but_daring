@@ -483,14 +483,14 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 5
+    axis: 0
     joyNum: 0
   - serializedVersion: 3
     m_Name: Player1Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: s
-    positiveButton: w
+    negativeButton: a
+    positiveButton: d
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -499,26 +499,10 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 5
+    axis: 0
     joyNum: 0
   - serializedVersion: 3
     m_Name: Player2Horizontal
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 5
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Player2Vertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: down
@@ -531,7 +515,23 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 5
+    axis: 1
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Player2Vertical
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: s
+    positiveButton: w
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
     joyNum: 0
   - serializedVersion: 3
     m_Name: Debug Horizontal
