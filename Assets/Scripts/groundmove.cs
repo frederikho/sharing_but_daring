@@ -8,12 +8,13 @@ public class groundmove : MonoBehaviour
 
     Rigidbody2D body;
     float y = 0f;
-    public float speed = 200f;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         y = transform.position.y; 
+        speed = 50f;
         body.velocity = new Vector2(0, -speed * Time.fixedDeltaTime);
     }
 
