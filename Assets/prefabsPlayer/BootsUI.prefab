@@ -114,10 +114,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 126451185795022861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91adb9a0c853349beae8e26e0bd73cdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 709eb4f3737a04627a090b6ee4ae8d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 1
+  offset: 2
   speed: 200
   p1button: j
   p2button: 1
