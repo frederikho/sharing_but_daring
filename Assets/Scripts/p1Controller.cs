@@ -82,12 +82,12 @@ public class p1Controller : MonoBehaviour
         if (collision.collider.name == "Main Camera" && collision.collider.gameObject.layer == 3) // 3 is Layer Collision with Player. Maybe change that. 
         {
             
-            //playerCollider.enabled = false; // besser: Change Collision Layer
+            playerCollider.enabled = false; // besser: Change Collision Layer
 
 
 
             Invoke("resetPlayerCollision", 4.0f);
-            //GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = Color.green;
             
             
             Canvas = GameObject.Find("Text_(TMP)lives");
@@ -96,10 +96,16 @@ public class p1Controller : MonoBehaviour
             
 
         }
-        else if (collision.collider.name == "enemy") 
+        else if (collision.collider.name == "catbat" && collision.collider.gameObject.layer == 6)
         {
-            // damage
-            // destroy enemy
+            playerCollider.enabled = false; // besser: Change Collision Layer
+            
+            Canvas = GameObject.Find("Text_(TMP)lives");
+            Canvas.GetComponent<livesControl>().livesleft = Canvas.GetComponent<livesControl>().livesleft - 1;
+        }
+        else 
+        {
+            Debug.Log(collision.collider.gameObject.layer);
         }
 
         
