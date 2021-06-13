@@ -67,7 +67,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: -1
   wallPrefabs:
-  - {fileID: 823580169103509557}
+  - {fileID: 3897808605733052931, guid: 9aee992248bf0934e968a855e67b7682, type: 3}
+  - {fileID: 4344335664995871102, guid: 437e59d30a503364aa40f138aabf376a, type: 3}
+  - {fileID: 4332145411064142355, guid: f3144366cd13f4670866b00bf93c0085, type: 3}
+  - {fileID: 7238692646373988010, guid: ec67dea4a9a7c4a08a2608f32ef721d4, type: 3}
+  - {fileID: 7107612562007472916, guid: 806cd83ad89c340d097cad552a2871f0, type: 3}
+  - {fileID: 7243899904878073423, guid: e22c77d8523f84c98b15ed81ca1174e8, type: 3}
+  - {fileID: 72283648355129093, guid: e4a70c932d24f4910827050229aef808, type: 3}
+  - {fileID: 7990247270154283727, guid: 9049d0d79c51d410cb52573e3dbdb387, type: 3}
   spawnDistance: 15
   destructionPoint: -15
   triggerPoint: 0
