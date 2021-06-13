@@ -56,7 +56,7 @@ public class bootsUI : MonoBehaviour
             
         }
 
-        Debug.Log((string) Input.GetKeyDown(p1button).ToString() + ownnerPlayer + (string) startedMoving.ToString() + (string) wasjustpressed1.ToString());
+        //Debug.Log((string) Input.GetKeyDown(p1button).ToString() + ownnerPlayer + (string) startedMoving.ToString() + (string) wasjustpressed1.ToString());
         if (Input.GetKeyDown(p1button) && ownnerPlayer == 1 && startedMoving == false && wasjustpressed1 == false){
             body.velocity = new Vector2(speed * Time.fixedDeltaTime, 0);
             startedMoving = true;

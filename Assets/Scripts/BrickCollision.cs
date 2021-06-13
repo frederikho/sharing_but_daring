@@ -40,8 +40,8 @@ public class BrickCollision : MonoBehaviour
         //Debug.Log(HammerUI.GetComponent<bootsUI>().ownnerPlayer);
         //collision.gameObject.SetActive(false);
         //Destroy(collision.collider.gameObject);
-        if ((collision.collider.name == "player 1"  &&  HammerUI.GetComponent<bootsUI>().ownnerPlayer == 1) || 
-            (collision.collider.name == "player 2" && HammerUI.GetComponent<bootsUI>().ownnerPlayer == 2))
+        if ((collision.collider.name == "Player1"  &&  HammerUI.GetComponent<bootsUI>().ownnerPlayer == 1) || 
+            (collision.collider.name == "Player2" && HammerUI.GetComponent<bootsUI>().ownnerPlayer == 2))
         {
             if (1 == 1){
                 Destroy(gameObject);
