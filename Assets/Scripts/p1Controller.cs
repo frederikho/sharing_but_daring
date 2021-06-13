@@ -10,7 +10,23 @@ public class p1Controller : MonoBehaviour
     private string AxisName;   // Start is called before the first frame update
     Rigidbody2D body;
     public float speed;
+    public bool slowed; 
+    
+    public float slowFactor;
     public float limiter;
+    Collider2D playerCollider;
+    
+    Camera cam;
+    private float camHeight;
+    private float camWidth;
+    private float camSize;
+    private float camAspect;
+
+    private bool playerHitBottom;
+
+    private GameObject Canvas;
+    public int livesleft;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -20,17 +36,70 @@ public class p1Controller : MonoBehaviour
         if (PlayerNumberControls == 2) {
             AxisName = "Player2";
         }
-
+        playerCollider = GetComponent<Collider2D>();
+        
+        // Camera stuff
+        cam = Camera.main;
+        camSize = cam.orthographicSize;
+        camHeight = camSize;
+        camWidth = camSize * 2;
+        
+        slowFactor = 1f;
+        slowed = false;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-    leftright = Input.GetAxisRaw(AxisName+"Horizontal") * speed;
-    updown = Input.GetAxisRaw(AxisName+"Vertical") * speed; 
+    leftright = Input.GetAxisRaw(AxisName+"Horizontal") * speed * slowFactor;
+    updown = Input.GetAxisRaw(AxisName+"Vertical") * speed * slowFactor; 
+        if (transform.position.y < (cam.transform.position.y - camHeight))
+        {
+            //Decrease Life by one
+
+            //
+
+            playerCollider.enabled = false; // besser: Change Collision Layer
+
+            //Debug.Log(camHeight.ToString() + camWidth.ToString());
+        }        
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.name == "Main Camera" && collision.collider.gameObject.layer == 3) // 3 is Layer Collision with Player. Maybe change that. 
+        {
+            
+            playerCollider.enabled = false; // besser: Change Collision Layer
+
+
+
+            Invoke("resetPlayerCollision", 4.0f);
+            //GetComponent<SpriteRenderer>().color = Color.white;
+            
+            
+            Canvas = GameObject.Find("Text_(TMP)lives");
+            Canvas.GetComponent<livesControl>().livesleft = Canvas.GetComponent<livesControl>().livesleft - 1;
+            
+            
+
+        }
+        else if (collision.collider.name == "enemy") 
+        {
+            // damage
+            // destroy enemy
+        }
+
         
     }
+
+    public void resetPlayerCollision()
+    {
+        playerCollider.enabled = true;
+    }
+
+
    void FixedUpdate(){
     if (leftright != 0 && updown != 0){
             leftright *= limiter;
