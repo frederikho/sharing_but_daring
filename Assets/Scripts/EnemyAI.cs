@@ -5,8 +5,10 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     private Transform player;
-    private string playerName = "Player1";
+    private string playerName = "Player";
     private Rigidbody2D rb;
+    private GameObject CloakUI;
+    private int playerNumber = 1;
 
     [SerializeField] LayerMask _layerMask;
     public float chaseSpeed = 3.0f;
@@ -15,8 +17,19 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (transform.position.x >= 0)
+        {
+            playerNumber = 2;
+        }
+        else
+        {
+            playerNumber = 1;
+        }
+
+        playerName += playerNumber;
         player = GameObject.Find(playerName).transform;
         rb = this.GetComponent<Rigidbody2D>();
+        CloakUI = GameObject.Find("CloakUI");
     }
 
     // Update is called once per frame
@@ -24,7 +37,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (isPlayerVisible())
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            // GetComponent<SpriteRenderer>().color = Color.red;
 
             Vector2 playerDirection = player.position - transform.position;
             playerDirection.Normalize();
@@ -33,7 +46,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.green;
+            // GetComponent<SpriteRenderer>().color = Color.green;
             rb.velocity = new Vector2(0, scrollSpeed);
         }
 
@@ -47,8 +60,7 @@ public class EnemyAI : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDirection, 1000f, _layerMask);
         if (hit.collider != null)
         {
-            Debug.Log("Hit: " + hit.collider.GetComponent<p1Controller>().speed);
-            if (hit.transform.name == playerName)
+            if (hit.transform.name == playerName && CloakUI.GetComponent<bootsUI>().ownnerPlayer != playerNumber)
             {
                 return true;
             }
