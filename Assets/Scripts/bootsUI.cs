@@ -12,8 +12,8 @@ public class bootsUI : MonoBehaviour
     public float speed = 200f;
     private bool startedMoving = false;
     Rigidbody2D body;
-    public string p1button = "j";
-    public string p2button = "1";
+    public string p1button = "1";
+    public string p2button = "j";
     private bool wasjustpressed1 = false;
     private bool wasjustpressed2 = false;
     // Start is called before the first frame update
