@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDirection, 1000f);
         if (hit.collider != null)
         {
-            Debug.Log("Hit: " + hit.transform.name);
+            //Debug.Log("Hit: " + hit.transform.name);
             if (hit.transform.name == playerName)
             {
                 return true;
