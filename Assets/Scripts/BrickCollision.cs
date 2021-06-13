@@ -5,6 +5,8 @@ using UnityEngine;
 public class BrickCollision : MonoBehaviour
 {
     Rigidbody2D body;
+    GameObject HammerUI;
+    bootsUI HammerUIScript;
     float y = 0f;
     public float speed; // should read speed from groundmove
     [SerializeField] private GameObject destructionParticles;
@@ -35,19 +37,24 @@ public class BrickCollision : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        HammerUI = GameObject.Find ("HammerUI");
+        Debug.Log(HammerUI.GetComponent<bootsUI>().ownnerPlayer);
         //collision.gameObject.SetActive(false);
         //Destroy(collision.collider.gameObject);
-        if (collision.collider.name == "player 1"  ||   collision.collider.name == "player 2")
+        if ((collision.collider.name == "player 1"  &&  HammerUI.GetComponent<bootsUI>().ownnerPlayer == 1) || 
+            (collision.collider.name == "player 2" && HammerUI.GetComponent<bootsUI>().ownnerPlayer == 2))
         {
-            // if (has hammer == TRUE )
-            Destroy(gameObject);
-            Debug.Log("Destroyed");
-            // play animation here
+            if (1 == 1){
+                Destroy(gameObject);
+                
+                // play animation here
+            
+            }
             
         }
         else
         {
-            Debug.Log(collision.collider.name);
+            //Debug.Log(collision.collider.name);
         }
         
     }

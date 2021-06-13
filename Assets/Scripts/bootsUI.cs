@@ -5,7 +5,7 @@ using UnityEngine;
 public class bootsUI : MonoBehaviour
 {   
        
-    public int ownnerPlayer = 1;
+    public int ownnerPlayer = 2;
     public float x = 0f;
     public float y = 0f;
     public float offset = 2;
@@ -22,6 +22,7 @@ public class bootsUI : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         x = transform.position.x;
         y = transform.position.y; 
+        ownnerPlayer = 2;
         
     }
 
@@ -42,14 +43,14 @@ public class bootsUI : MonoBehaviour
             transform.position = new Vector3(x-offset, y, 0);
             
             startedMoving = false; 
-            ownnerPlayer  = 2;  
+            ownnerPlayer  = 1;  
         }
         if (startedMoving == true && ownnerPlayer == 2 && x2 >= x) {
             body.velocity = new Vector2(0, 0);
             transform.position = new Vector3(x, y, 0);
             
             startedMoving = false; 
-            ownnerPlayer  = 1;
+            ownnerPlayer  = 2;
             
         }
 
@@ -66,6 +67,8 @@ public class bootsUI : MonoBehaviour
 
         
     }
+
+
 }
 
 
