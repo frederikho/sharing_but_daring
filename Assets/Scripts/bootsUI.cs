@@ -40,14 +40,14 @@ public class bootsUI : MonoBehaviour
             wasjustpressed2 = false;
         }
 
-        if (startedMoving == true && ownnerPlayer == 1 && x2 <= x - offset ) {
+        if (startedMoving == true && ownnerPlayer == 2 && x2 <= x - offset ) {
             body.velocity = new Vector2(0, 0);
             transform.position = new Vector3(x-offset, y, 0);
             
             startedMoving = false; 
             ownnerPlayer  = 1;  
         }
-        if (startedMoving == true && ownnerPlayer == 2 && x2 >= x) {
+        if (startedMoving == true && ownnerPlayer == 1 && x2 >= x) {
             body.velocity = new Vector2(0, 0);
             transform.position = new Vector3(x, y, 0);
             
@@ -58,12 +58,12 @@ public class bootsUI : MonoBehaviour
 
         Debug.Log((string) Input.GetKeyDown(p1button).ToString() + ownnerPlayer + (string) startedMoving.ToString() + (string) wasjustpressed1.ToString());
         if (Input.GetKeyDown(p1button) && ownnerPlayer == 1 && startedMoving == false && wasjustpressed1 == false){
-            body.velocity = new Vector2(-speed * Time.fixedDeltaTime, 0);
+            body.velocity = new Vector2(speed * Time.fixedDeltaTime, 0);
             startedMoving = true;
             wasjustpressed1 = true;
         }
         if (Input.GetKeyDown(p2button) && ownnerPlayer == 2 && startedMoving == false && wasjustpressed2 == false){
-            body.velocity = new Vector2(speed * Time.fixedDeltaTime, 0);
+            body.velocity = new Vector2(-speed * Time.fixedDeltaTime, 0);
             startedMoving = true;
             wasjustpressed2 = true;
         }
