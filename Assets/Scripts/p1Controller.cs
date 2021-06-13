@@ -15,6 +15,7 @@ public class p1Controller : MonoBehaviour
     public float slowFactor;
     public float limiter;
     Collider2D playerCollider;
+    private GameObject bootUI;
     
     Camera cam;
     private float camHeight;
@@ -44,26 +45,36 @@ public class p1Controller : MonoBehaviour
         camHeight = camSize;
         camWidth = camSize * 2;
         
-        slowFactor = 1f;
+        slowFactor = 0.5f;
         slowed = false;
-        
+        bootUI = GameObject.Find("BootsUI");
     }
 
     // Update is called once per frame
     void Update()
     {
-    leftright = Input.GetAxisRaw(AxisName+"Horizontal") * speed * slowFactor;
-    updown = Input.GetAxisRaw(AxisName+"Vertical") * speed * slowFactor; 
+        leftright = Input.GetAxisRaw(AxisName+"Horizontal") * speed;
+        updown = Input.GetAxisRaw(AxisName+"Vertical") * speed;
+
+
+        // playewr is slowed if true
+        if (slowed && bootUI.GetComponent<bootsUI>().ownnerPlayer != PlayerNumberControls)
+        {
+            leftright *= slowFactor;
+            updown *= slowFactor;
+        }
+
         if (transform.position.y < (cam.transform.position.y - camHeight))
         {
             //Decrease Life by one
 
             //
 
-            playerCollider.enabled = false; // besser: Change Collision Layer
+            //playerCollider.enabled = false; // besser: Change Collision Layer
 
             //Debug.Log(camHeight.ToString() + camWidth.ToString());
-        }        
+        }
+        resetPlayerCollision();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -71,7 +82,7 @@ public class p1Controller : MonoBehaviour
         if (collision.collider.name == "Main Camera" && collision.collider.gameObject.layer == 3) // 3 is Layer Collision with Player. Maybe change that. 
         {
             
-            playerCollider.enabled = false; // besser: Change Collision Layer
+            //playerCollider.enabled = false; // besser: Change Collision Layer
 
 
 

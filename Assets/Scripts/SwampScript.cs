@@ -19,12 +19,12 @@ public class SwampScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         p1Controller player = collider.GetComponent<p1Controller>();
-        Debug.Log("Swamp Enter: " + player);
+        player.slowed = true;
     }
     
     void OnTriggerExit2D(Collider2D collider)
     {
         p1Controller player = collider.GetComponent<p1Controller>();
-        Debug.Log("Swamp Leave: " + player);
+        player.slowed = false;
     }
 }
