@@ -79,11 +79,11 @@ public class p1Controller : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.collider.name == "Main Camera" && collision.collider.gameObject.layer == 3) // 3 is Layer Collision with Player. Maybe change that. 
         {
-            
+            Debug.Log("Colliding with Camera.");
             playerCollider.enabled = false; // besser: Change Collision Layer
-
 
 
             Invoke("resetPlayerCollision", 4.0f);
