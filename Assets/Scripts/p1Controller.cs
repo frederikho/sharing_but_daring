@@ -36,9 +36,6 @@ public class p1Controller : MonoBehaviour
             leftright *= limiter;
             updown  *= limiter;
         }
-    if (1 == 1) {
-        
-    }
     body.velocity = new Vector2(leftright * Time.fixedDeltaTime, updown * Time.fixedDeltaTime);
     }
 }
