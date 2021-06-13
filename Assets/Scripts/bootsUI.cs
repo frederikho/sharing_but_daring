@@ -24,11 +24,13 @@ public class bootsUI : MonoBehaviour
         y = transform.position.y; 
         ownnerPlayer = 2;
         
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         float x2 = transform.position.x;
         float y2 = transform.position.y; 
         if (Input.GetKeyUp(p1button)) {
@@ -54,6 +56,7 @@ public class bootsUI : MonoBehaviour
             
         }
 
+        Debug.Log((string) Input.GetKeyDown(p1button).ToString() + ownnerPlayer + (string) startedMoving.ToString() + (string) wasjustpressed1.ToString());
         if (Input.GetKeyDown(p1button) && ownnerPlayer == 1 && startedMoving == false && wasjustpressed1 == false){
             body.velocity = new Vector2(-speed * Time.fixedDeltaTime, 0);
             startedMoving = true;
