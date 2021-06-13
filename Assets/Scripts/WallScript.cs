@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WallScript : MonoBehaviour
 {
-    public float speed = -10.0f;
+    public float speed = -1.0f;
     private Rigidbody2D rb;
     private bool canSummonNewElement = true;
-    public GameObject prefab;
+    public List<GameObject> wallPrefabs;
 
-    public float respawnPoint = 15;
+    public float spawnDistance = 15;
     public float destructionPoint = -15;
     public float triggerPoint = 0;
 
@@ -32,13 +32,13 @@ public class WallScript : MonoBehaviour
         if (transform.position.y <= destructionPoint)
         {
             Destroy(gameObject);
-            Debug.Log("Destroyed");
         }
     }
 
     void summonNewElement()
     {
-        Instantiate(prefab, new Vector2(-6.5f, respawnPoint), Quaternion.identity);
+        int wallIndex = UnityEngine.Random.Range(0, wallPrefabs.Count - 1);
+        Instantiate(wallPrefabs[wallIndex], new Vector2(transform.position.x, transform.position.y + spawnDistance), Quaternion.identity);
         canSummonNewElement = false;
     }
 }
