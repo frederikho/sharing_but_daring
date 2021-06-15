@@ -10,12 +10,14 @@ public class p1Controller : MonoBehaviour
     private string AxisName;   // Start is called before the first frame update
     Rigidbody2D body;
     public float speed;
-    public bool slowed; 
-    
+
+    // parameters for player slowing down when hitting swamp
+    public bool slowed;
     public float slowFactor;
     public float limiter;
-    Collider2D playerCollider;
     private GameObject bootUI;
+
+    Collider2D playerCollider;
     
     Camera cam;
     private float camHeight;
@@ -24,6 +26,12 @@ public class p1Controller : MonoBehaviour
     private float camAspect;
 
     private bool playerHitBottom;
+
+    // variables for screen clamping
+    public float playerOverhang;
+    private Vector3 screenBounds;
+    private float playerWidth;
+    private float playerHeight;
 
     private GameObject Canvas;
     public int livesleft;
@@ -48,6 +56,11 @@ public class p1Controller : MonoBehaviour
         slowFactor = 0.5f;
         slowed = false;
         bootUI = GameObject.Find("BootsUI");
+
+        // initiate settings for screen clamping
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        playerWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2 - playerOverhang;
+        playerHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
     }
 
     // Update is called once per frame
@@ -117,11 +130,28 @@ public class p1Controller : MonoBehaviour
     }
 
 
-   void FixedUpdate(){
-    if (leftright != 0 && updown != 0){
+    void FixedUpdate(){
+        if (leftright != 0 && updown != 0){
             leftright *= limiter;
             updown  *= limiter;
         }
-    body.velocity = new Vector2(leftright * Time.fixedDeltaTime, updown * Time.fixedDeltaTime);
+        body.velocity = new Vector2(leftright * Time.fixedDeltaTime, updown * Time.fixedDeltaTime);
+    }
+
+
+    void LateUpdate()
+    {
+        // clamping player position to be onscreen at all times
+        Vector3 playerPos = transform.position;
+        if (PlayerNumberControls == 1)
+        {
+            playerPos.x = Mathf.Clamp(playerPos.x, screenBounds.x * -1 + playerWidth, -playerWidth);
+        }
+        else
+        {
+            playerPos.x = Mathf.Clamp(playerPos.x, playerWidth, screenBounds.x - playerWidth);
+        }
+        playerPos.y = Mathf.Clamp(playerPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
+        transform.position = playerPos;
     }
 }

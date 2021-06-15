@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2388545392414639275}
   - component: {fileID: 2388545392414639287}
   - component: {fileID: 3288960412157452909}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: catbat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2388545392414639274}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   chaseSpeed: 3
   scrollSpeed: -1
 --- !u!95 &3288960412157452909

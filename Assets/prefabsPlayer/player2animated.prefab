@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4085637907563331388}
   - component: {fileID: 4085637907563331389}
   - component: {fileID: 4934343529815618523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: player2animated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,11 @@ MonoBehaviour:
   leftright: 0
   updown: 0
   speed: 200
+  slowed: 0
+  slowFactor: 0
   limiter: 0.8
+  playerOverhang: 0.35
+  livesleft: 0
 --- !u!61 &4085637907563331388
 BoxCollider2D:
   m_ObjectHideFlags: 0

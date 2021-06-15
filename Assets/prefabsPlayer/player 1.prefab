@@ -101,7 +101,11 @@ MonoBehaviour:
   leftright: 0
   updown: 0
   speed: 200
+  slowed: 0
+  slowFactor: 0
   limiter: 0
+  playerOverhang: 20
+  livesleft: 0
 --- !u!61 &4098813974475940766
 BoxCollider2D:
   m_ObjectHideFlags: 0
