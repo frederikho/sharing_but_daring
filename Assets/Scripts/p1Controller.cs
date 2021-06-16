@@ -11,13 +11,23 @@ public class p1Controller : MonoBehaviour
     Rigidbody2D body;
     public float speed;
 
+    // the speed at which the map scrolls by
+    public float mapSpeed = 1.0f;
+
     // parameters for player slowing down when hitting swamp
-    public bool slowed;
-    public float slowFactor;
+    public int slowed = 0;
+    public float slowDragBack = 0f;     // the amount of velocity that the player is dragged backwards by
+    public float slowFactor = 0.5f;
     public float limiter;
     private GameObject bootUI;
 
-    Collider2D playerCollider;
+    // if this is true, player will take damage once invulnerability ends
+    public bool playerDamaged = false;
+    public float invulnerabilityTime = 5.0f;
+    private float invulnerabilityLeft = 0;
+
+    BoxCollider2D playerCollider;
+    SpriteRenderer spriteRenderer;
     
     Camera cam;
     private float camHeight;
@@ -29,6 +39,7 @@ public class p1Controller : MonoBehaviour
 
     // variables for screen clamping
     public float playerOverhang;
+    public float bottomOutOfScreen;
     private Vector3 screenBounds;
     private float playerWidth;
     private float playerHeight;
@@ -45,7 +56,6 @@ public class p1Controller : MonoBehaviour
         if (PlayerNumberControls == 2) {
             AxisName = "Player2";
         }
-        playerCollider = GetComponent<Collider2D>();
         
         // Camera stuff
         cam = Camera.main;
@@ -53,14 +63,16 @@ public class p1Controller : MonoBehaviour
         camHeight = camSize;
         camWidth = camSize * 2;
         
-        slowFactor = 0.5f;
-        slowed = false;
+        slowed = 0;
         bootUI = GameObject.Find("BootsUI");
 
         // initiate settings for screen clamping
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         playerWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2 - playerOverhang;
         playerHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+
+        spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -70,63 +82,42 @@ public class p1Controller : MonoBehaviour
         updown = Input.GetAxisRaw(AxisName+"Vertical") * speed;
 
 
-        // playewr is slowed if true
-        if (slowed && bootUI.GetComponent<bootsUI>().ownnerPlayer != PlayerNumberControls)
+        // player is slowed if true
+        if (slowed > 0 && bootUI.GetComponent<bootsUI>().ownnerPlayer != PlayerNumberControls)
         {
             leftright *= slowFactor;
             updown *= slowFactor;
+            updown -= mapSpeed * (1 - slowFactor);  // this here just slows the player based on the map scroll speed
         }
 
-        if (transform.position.y < (cam.transform.position.y - camHeight))
+
+        spriteRenderer.color = Color.white;
+        playerCollider.enabled = true;
+        if (invulnerabilityLeft > 0)
         {
-            //Decrease Life by one
-
-            //
-
-            //playerCollider.enabled = false; // besser: Change Collision Layer
-
-            //Debug.Log(camHeight.ToString() + camWidth.ToString());
+            if (invulnerabilityLeft % 1 > 0.5f)
+            {
+                spriteRenderer.color = Color.red;
+            }
+            playerCollider.enabled = false;
+            invulnerabilityLeft -= Time.deltaTime;
         }
-        resetPlayerCollision();
+        else if (playerDamaged)
+        {
+            damagePlayer();
+            playerCollider.enabled = false;
+            invulnerabilityLeft = invulnerabilityTime;
+        }
+
+        playerDamaged = false;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if (collision.collider.name == "Main Camera" && collision.collider.gameObject.layer == 3) // 3 is Layer Collision with Player. Maybe change that. 
+        if (collision.collider.name == "catbat")
         {
-            Debug.Log("Colliding with Camera.");
-            playerCollider.enabled = false; // besser: Change Collision Layer
-
-
-            Invoke("resetPlayerCollision", 4.0f);
-            GetComponent<SpriteRenderer>().color = Color.green;
-            
-            
-            Canvas = GameObject.Find("Text_(TMP)lives");
-            Canvas.GetComponent<livesControl>().livesleft = Canvas.GetComponent<livesControl>().livesleft - 1;
-            
-            
-
+            playerDamaged = true;
         }
-        else if (collision.collider.name == "catbat" && collision.collider.gameObject.layer == 6)
-        {
-            playerCollider.enabled = false; // besser: Change Collision Layer
-            
-            Canvas = GameObject.Find("Text_(TMP)lives");
-            Canvas.GetComponent<livesControl>().livesleft = Canvas.GetComponent<livesControl>().livesleft - 1;
-        }
-        else 
-        {
-            Debug.Log(collision.collider.gameObject.layer);
-        }
-
-        
-    }
-
-    public void resetPlayerCollision()
-    {
-        playerCollider.enabled = true;
     }
 
 
@@ -151,7 +142,19 @@ public class p1Controller : MonoBehaviour
         {
             playerPos.x = Mathf.Clamp(playerPos.x, playerWidth, screenBounds.x - playerWidth);
         }
-        playerPos.y = Mathf.Clamp(playerPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
+
+        if (playerPos.y <= screenBounds.y * -1 + playerHeight - bottomOutOfScreen)
+        {
+            playerDamaged = true;
+        }
+        playerPos.y = Mathf.Clamp(playerPos.y, screenBounds.y * -1 + playerHeight - bottomOutOfScreen, screenBounds.y - playerHeight);
         transform.position = playerPos;
+    }
+
+
+    void damagePlayer()
+    {
+        Canvas = GameObject.Find("Text_(TMP)lives");
+        Canvas.GetComponent<livesControl>().livesleft = Canvas.GetComponent<livesControl>().livesleft - 1;
     }
 }
