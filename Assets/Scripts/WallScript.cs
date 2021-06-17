@@ -6,7 +6,7 @@ public class WallScript : MonoBehaviour
 {
     public float speed = -1.0f;
     private Rigidbody2D rb;
-    private bool canSummonNewElement = true;
+    private bool canSummonNewElement = true; //löschen? wird nicht gebraucht.
     public List<GameObject> wallPrefabs;
 
     public float spawnDistance = 15;
@@ -39,6 +39,6 @@ public class WallScript : MonoBehaviour
     {
         int wallIndex = UnityEngine.Random.Range(0, wallPrefabs.Count - 1);
         Instantiate(wallPrefabs[wallIndex], new Vector2(transform.position.x, transform.position.y + spawnDistance), Quaternion.identity);
-        canSummonNewElement = false;
+        canSummonNewElement = false; 
     }
 }

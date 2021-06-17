@@ -9,6 +9,7 @@ public class BrickCollision : MonoBehaviour
     bootsUI HammerUIScript;
     float y = 0f;
     public float speed; // should read speed from groundmove
+    public AudioClip destroyBrickSound;
     [SerializeField] private GameObject destructionParticles;
 
     
@@ -16,6 +17,9 @@ public class BrickCollision : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
+        GetComponent<AudioSource>().playOnAwake = false;
+        GetComponent<AudioSource>().clip = destroyBrickSound;
         /*
         y = transform.position.y; 
         speed = 50f;
@@ -26,7 +30,7 @@ public class BrickCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         //body.velocity = new Vector2(0, -speed * Time.fixedDeltaTime);
         
         //float y2 = transform.position.y; 
@@ -40,12 +44,13 @@ public class BrickCollision : MonoBehaviour
         //Debug.Log(HammerUI.GetComponent<bootsUI>().ownnerPlayer);
         //collision.gameObject.SetActive(false);
         //Destroy(collision.collider.gameObject);
+        
         if ((collision.collider.name == "Player1"  &&  HammerUI.GetComponent<bootsUI>().ownnerPlayer == 1) || 
             (collision.collider.name == "Player2" && HammerUI.GetComponent<bootsUI>().ownnerPlayer == 2))
         {
             if (1 == 1){
                 Destroy(gameObject);
-                
+                GetComponent<AudioSource> ().Play ();
                 // play animation here
             
             }
