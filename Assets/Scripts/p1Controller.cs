@@ -114,8 +114,9 @@ public class p1Controller : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name == "catbat")
+        if (collision.collider.gameObject.layer == 8) // I wrote dirty bullshit that will cause bugs lmao
         {
+            collision.collider.GetComponent<EnemyAI>().setSatisfied();
             playerDamaged = true;
         }
     }

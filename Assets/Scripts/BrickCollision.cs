@@ -7,7 +7,6 @@ public class BrickCollision : MonoBehaviour
     Rigidbody2D body;
     GameObject HammerUI;
     bootsUI HammerUIScript;
-    float y = 0f;
     public float speed; // should read speed from groundmove
     public AudioClip destroyBrickSound;
     [SerializeField] private GameObject destructionParticles;
@@ -49,10 +48,12 @@ public class BrickCollision : MonoBehaviour
             (collision.collider.name == "Player2" && HammerUI.GetComponent<bootsUI>().ownnerPlayer == 2))
         {
             if (1 == 1){
-                Destroy(gameObject);
-                GetComponent<AudioSource> ().Play ();
+                GetComponent<AudioSource>().Play();
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
+                //Destroy(gameObject);
                 // play animation here
-            
+
             }
             
         }
