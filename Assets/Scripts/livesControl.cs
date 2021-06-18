@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class livesControl : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class livesControl : MonoBehaviour
     if (livesleft != lives) {
         textMeshPro.text = "x "+livesleft.ToString();
         lives = livesleft;
-    }   
+    } 
+    if (lives <= 0) {
+        SceneManager.LoadScene("GameOver");
+    }  
     }
+
 }
