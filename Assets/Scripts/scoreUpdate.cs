@@ -11,7 +11,7 @@ public class scoreUpdate : MonoBehaviour
     public int score = 0;
     public float timer = 0.4f;
     public float actualtimer;
-    public int increment = 50;
+    public int increment = 10;
     [SerializeField]TextMeshProUGUI textMeshPro;
     void Start() {
         actualtimer = timer;

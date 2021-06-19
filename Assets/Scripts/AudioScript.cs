@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AudioScript : MonoBehaviour
 {
+    public float backgroundMusicInitVolume;
     // Start is called before the first frame update
     void Start()
     {
-        
+        backgroundMusicInitVolume = GetComponent<AudioSource>().volume;
     }
 
     // Update is called once per frame
